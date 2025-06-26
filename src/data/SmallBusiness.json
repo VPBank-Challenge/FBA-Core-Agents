@@ -1,0 +1,72 @@
+[
+  {
+    "question": "Tôi có thể mua bao hiểm nhân thọ cho người thân được không?",
+    "answer": "Hoàn toàn được. Khi có nhu cầu, Quý khách chỉ cần liên hệ Nhân viên CommCredit. Nhân viên của chúng tôi sẽ hỗ trợ tư vấn và hoàn thành giấy tờ mua bảo hiểm cho khách hàng.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi có nhu cầu mua bảo hiểm nhân thọ nhưng chưa có đủ khả năng tài chính. CommCredit có hỗ trợ không?",
+    "answer": "Hộ Kinh doanh vay tại CommCredit được hỗ trợ tài chính để mua bảo hiểm nhân thọ, không phải tự đóng tiền. Ví dụ: Quý khách cần vay 100 triệu và muốn mua bảo hiểm nhân thọ 6 triệu thì CommCredit duyệt vay 106 triệu cho Quý khách.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Khi gặp sự kiện không may, tôi phải làm gì để nhận tiền bồi thường bảo hiểm?",
+    "answer": "Khách hàng hoặc người thân của khách hàng có thể liên hệ Nhân viên CommCredit phụ trách hồ sơ vay hoặc gọi tổng đài 1900545415 để thông báo. CommCredit sẽ hướng dẫn các thủ tục để nhận tiền bồi thường",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi không có khả năng để mua bảo hiểm khoản vay thì phải làm sao?",
+    "answer": "Quý khách không cần phải lo lắng. Phí bảo hiểm sẽ được cộng trực tiếp vào số tiền vay do CommCredit giải ngân.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Bảo hiểm khoản vay là tự nguyện hay bắt buộc đối với khách hàng vay tại CommCredit?",
+    "answer": "Bảo hiểm khoản vay là bắt buộc đối với khách hàng vay tại CommCredit. Chỉ với số tiền nhỏ, bảo hiểm khoản vay mang lại sự bảo vệ to lớn cho người đi vay và gia đình trong các trường hợp rủi ro như tử vong, tai nạn, thương tật…",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi nhận thẻ ở đâu?",
+    "answer": "Khi mở thẻ, Quý khách cần ghi chú muốn nhận thẻ tại điểm giao dịch VPBank nào. Trong vòng 7-10 ngày sau khi khoản vay tại CommCredit được giải ngân, Quý khách có thể đến điểm giao dịch đã ghi chú để nhận thẻ. Khi đi vui lòng mang theo CMND",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "CommCredit định giá sạp của Hộ Kinh doanh dựa trên các yếu tố nào?",
+    "answer": "Các chuyên viên thẩm định của CommCredit cam kết định giá hấp dẫn sạp chợ của Hộ Kinh doanh dựa trên việc tham khảo giá công bố của nhà nước, giá thị trường cũng như kinh nghiệm lâu năm.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi làm chủ công việc kinh doanh (không phải làm thuê) và đang buôn bán tại sạp do Vợ/Chồng mình đứng tên sở hữu. Tôi có thể vay siêu tốc không?",
+    "answer": "Khách hàng vẫn có thể vay siêu tốc nếu đang buôn bán tại sạp do Vợ/Chồng, Bố/Mẹ ruột, Con ruột, Anh/Chị/Em ruột đứng tên sở hữu. Lúc, này, khách hàng và Vợ/Chồng, Bố/Mẹ ruột, Con ruột, Anh/Chị/Em ruột sẽ đồng vay vốn tại CommCredit.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Sản phẩm vay Thuế+  có chấp nhận biên lai đóng thuế môn bài hay thuế giá trị gia tăng không?",
+    "answer": "Hiện tại CommCredit chưa có sản phẩm chấp nhận biên lai thuế môn bài và giá trị gia tăng. Chúng tôi sẽ có thông báo rộng rãi nếu có chính sách mới.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi có đóng thuế nhưng làm mất biên lai thì phải làm sao để vay?",
+    "answer": "Quý khách có thể liên hệ cơ quan thuế để xin lại xác nhận hoặc đợi đến kỳ đóng thuế tiếp theo.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi đang có khoản vay tại ngân hàng/công ty tài chính khác, tôi có thể vay thêm tại CommCredit?",
+    "answer": "Hộ Kinh doanh vẫn có thể vay thêm tại CommCredit  khi có khoản vay tại ngân hàng/ công ty tài chính khác với điều kiện trong quá trình vay vốn không có lịch sử trả nợ xấu.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Tôi không có giấy phép kinh doanh có thể vay tại CommCredit không?",
+    "answer": "Nếu không có giấy phép kinh doanh, khách hàng có thể dùng rất nhiều các loại giấy tờ khác để thay thế như Biên lai nộp thuế khoán/Giấy sở hữu sạp/ Giấy xác nhận của Ban quản lý chợ, tổ dân phố, Ủy Ban Nhân Dân Phường, Xã…",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Điều kiện để khách hàng vay tại CommCredit là gì?",
+    "answer": "CommCredit cho vay đối với khách hàng là Hộ Kinh doanh/Tiểu thương đang  buôn bán tại địa điểm cố định (cửa hàng, sạp chợ, quán) và có kinh nghiệm kinh doanh từ 1 năm trở lên. Căn cứ từng sản phẩm, CommCredit sẽ tư vấn khách hàng cung cấp các giấy tờ phù hợp để làm hồ sơ.",
+    "label": "Hộ kinh doanh"
+  },
+  {
+    "question": "Thủ tục vay tại CommCredit khác gì so với các ngân hàng/ công ty tài chính khác?",
+    "answer": "CommCredit chuyên biệt phục vụ Hộ Kinh doanh/Tiểu thương nên vì vậy thủ tục vay đơn giản và phù hợp nhất cho khách hàng buôn bán. Chúng tôi linh hoạt chấp nhận đa dạng các loại giấy tờ đặc thù của hoạt động kinh doanh, buôn bán. Đặc biệt, CommCredit không giữ bản gốc giấy tờ của khách hàng, chỉ mượn xem hoặc photo.",
+    "label": "Hộ kinh doanh"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Công ty tôi muốn rút tiền mặt từ tài khoản thì có thể rút trực tiếp tại Chi nhánh VPBank được không?",
+    "answer": "- Nếu người đại diện theo pháp luật yêu cầu rút mặt, Khách hàng chỉ cần mang theo con dấu và CMND cá nhân và thực hiện rút qua giấy lĩnh tiền mặt\n- Nếu không phải là người đại diện pháp luật, Khách hàng cần mang theo Séc, CMND và giấy giới thiệu theo mẫu của công ty để thực hiện giao dịch.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Như thế nào được gọi là chứng từ bản gốc?",
+    "answer": "Là chứng từ do Khách hàng lập theo mẫu của VPBank, có chữ ký tay và đóng dấu đỏ khớp đúng với mẫu chữ ký và con dấu đã đăng ký tại Hợp đồng giao dịch qua fax.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Cán bộ đầu mối thực hiện giao dịch qua fax là ai?",
+    "answer": "Là cán bộ của VPBank và Khách hàng được chỉ định thực hiện việc giao, nhận và xác nhận số lượng, giá trị chứng từ giao dịch qua fax theo Hợp đồng dịch vụ giao dịch qua fax.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Dịch vụ Thu hộ Khách hàng doanh nghiệp lớn là gì?",
+    "answer": "Là dịch vụ VPBank cung cấp cho các Khách hàng doanh nghiệp có nhu cầu thu tiền từ Người nộp tiền thông qua mạng lưới giao dịch rộng lớn của VPBank.\n\nTheo đó VPBank sẽ thực hiện thu hộ Khách hàng doanh nghiệp các khoản tiền do Người nộp tiền nộp, hạch toán vào tài khoản của khách hàng doanh nghiệp và thu phí Thu hộ.\n\nDịch vụ Thu hộ được thực hiện tại các Địa điểm giao dịch của VPBank hoặc tại Địa điểm của Khách hàng doanh nghiệp tùy theo nhu cầu của khách hàng doanh nghiệp, với mức Phí dịch vụ tương ứng.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Dịch vụ Chi hộ Khách hàng doanh nghiệp lớn là gì?",
+    "answer": "Là dịch vụ VPBank cung cấp cho các Khách hàng doanh nghiệp có nhu cầu chi tiền cho Người lĩnh tiền thông qua mạng lưới giao dịch rộng lớn của VPBank.\n\nTheo đó VPBank sẽ thực hiện ghi nợ tài khoản của Khách hàng doanh nghiệp, chi tiền cho người lĩnh tiền và thu phí Chi hộ.\n\nDịch vụ Chi hộ được thực hiện tại Địa điểm giao dịch của VPBank hoặc tại địa điểm khác theo yêu cầu của Khách hàng doanh nghiệp và được Giám đốc Khối Ngân hàng bán buôn hoặc Giám đốc Khối khách hàng cá nhân và SME phê duyệt.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Thời gian thực hiện Dịch vụ Thu hộ, Chi hộ cho Khách hàng doanh nghiệp lớn như thế nào?",
+    "answer": "Tại Địa điểm giao dịch của VPBank\n\n    Dịch vụ thu/chi hộ được thực hiện trong các ngày làm việc, từ Thứ Hai đến Thứ Sáu và sáng ngày Thứ Bảy khi các Địa điểm giao dịch của VPBank có mở cửa giao dịch (trừ các ngày nghỉ lễ theo quy định của pháp luật Việt Nam và theo quy định khác của VPBank), thời gian giao dịch cụ thể như sau:\n\n    - Buổi sáng: Từ 8h00 đến 12h00\n    - Buổi chiều: Từ 13h00 đến 17h00\n\n\nTại Địa điểm của Khách hàng doanh nghiệp: thực hiện theo thỏa thuận giữa VPBank và Khách hàng doanh nghiệp trong Hợp đồng dịch vụ thu hộ và Hợp đồng dịch vụ chi hộ tương ứng.",
+    "label": "Doanh nghiệp"
+  },
+  {
+    "question": "Giờ làm việc hàng ngày của Chi nhánh, phòng giao dịch VPBank có khác nhau theo từng vùng miền hay không?",
+    "answer": "Hiện nay, có sự khác biệt về giờ làm việc của các Chi nhánh, phòng giao dịch tại các vùng miền.\n\nVí dụ: tại Hà Nội, tất cả các Chi nhánh/PGD làm việc từ 8h sáng.\n\nTại Đà Nẵng, tất cả các Chi nhánh/PGD làm việc từ 7h30 sáng ...\n\nCụ thể về giờ làm việc của các Chi nhánh/PGD, Khách hàng có thể liên hệ với Tổng đài Call Center 247 theo số (024) 39 288 880 hoặc 1900 545 415 để được cung cấp thông tin.",
+    "label": "Doanh nghiệp"
+  }
+]
