@@ -1,6 +1,6 @@
 from src.prompts.specialist_prompt import SPECIALIST_SYSTEM_PROMPT, specialist_user_prompt
 from src.models.workflow_state import WorkflowState
-from src.models.receptionist import ReceptionistResponse
+from src.models.specialist_response import SpecialistResponse
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 class SpecialistAgent:
@@ -12,5 +12,5 @@ class SpecialistAgent:
                                                                      search_results=state.search_results))
         ]
 
-        response = llm.invoke(messages)
-        return {"output": response.content}
+        response = llm.with_structured_output(SpecialistResponse).invoke(messages)
+        return {"output": response.output, "need_human": response.need_human}

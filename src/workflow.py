@@ -14,7 +14,6 @@ from .agents.summarizer_agent import SummarizerAgent
 from .agents.analyst_agent import AnalystAgent
 
 from .models.workflow_state import WorkflowState
-from .models.question_analysis import QuestionAnalysis
 
 
 class Workflow:
@@ -70,9 +69,7 @@ class Workflow:
     def _search_step(self, state: WorkflowState) -> Dict[str, Any]:
         print("Searching for relevant information...")
         query = getattr(state.analysis, "clarified_query", None) or state.query
-
         top_items = self.search_knn(query, top_k=3)
-
         top_items.extend(self.search_knn(state.query, top_k=3))
 
         answers = []

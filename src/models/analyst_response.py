@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 
-class QuestionAnalysis(BaseModel):
+class AnalystResponse(BaseModel):
     main_topic: str
     key_information: List[str]
     clarified_query: str

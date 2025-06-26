@@ -26,6 +26,8 @@ def main():
                 print("Question Analysis: ")
                 print("-" * 40)
                 print(result.analysis)
+            if result.need_human:
+                print("Human Interfere............")
 
 
 if __name__ == "__main__":
