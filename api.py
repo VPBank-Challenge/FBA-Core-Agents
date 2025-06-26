@@ -56,6 +56,7 @@ def chat():
             "key_information": result.analysis.key_information,
             "clarified_query": result.analysis.clarified_query,
             "customer_type": result.analysis.customer_type,
+            "type_of_query": result.type_of_query,
         }
         
         return jsonify(response) 
