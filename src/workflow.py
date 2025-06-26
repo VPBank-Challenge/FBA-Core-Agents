@@ -6,18 +6,30 @@ from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain_core.chat_history import InMemoryChatMessageHistory
+# from langchain.memory import ChatMessageHistory as InMemoryChatMessageHistory
+
 from .models import ResearchState, ReceptionistResponse, QuestionAnalysis
 from .prompts import AgentPrompts
 from .bert_embedding import Embedder
 
 
 class Workflow:
-    def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
+    def __init__(self, api_key=None, model="gpt-4o-mini"):
+        # Set API key and model
+        self.api_key = api_key
+        self.model = model
+        
+        self.llm = ChatOpenAI(
+            api_key=self.api_key,
+            model=self.model,
+            temperature=0.1
+        )
+        
         self.prompts = AgentPrompts()
         self.workflow = self._build_workflow()
         self.memory = InMemoryChatMessageHistory()
         self.embedder = Embedder()
+
 
         embedding_data_path = os.path.join(os.path.dirname(__file__), "data", "embeddings_data.json")
         with open(embedding_data_path, "r", encoding="utf-8") as f:

@@ -1,0 +1,10 @@
+langchain>=0.3.26
+langchain-openai>=0.3.25
+langgraph>=0.4.9
+numpy>=2.3.1
+python-dotenv>=1.1.1
+torch>=2.7.1
+tqdm>=4.67.1
+transformers>=4.52.4
+flask>=2.3.0
+werkzeug>=2.3.0
