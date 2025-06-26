@@ -1,10 +1,11 @@
 [project]
-name = "FBA Core Agents"
+name = "core_agent"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "flask>=3.1.1",
     "langchain>=0.3.26",
     "langchain-openai>=0.3.25",
     "langgraph>=0.4.9",

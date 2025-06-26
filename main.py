@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from src.workflow import Workflow
 
@@ -5,7 +6,7 @@ load_dotenv()
 
 
 def main():
-    workflow = Workflow()
+    workflow = Workflow(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4.1-mini")
     print("VPBANK ASSISTANT")
 
     while True:
