@@ -1,6 +1,6 @@
 from src.prompts.receptionist_prompt import RECEPTIONIST_SYSTEM_PROMPT, receptionist_user_prompt
 from src.models.workflow_state import WorkflowState
-from src.models.receptionist import ReceptionistResponse
+from src.models.receptionist_response import ReceptionistResponse
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 class ReceptionistAgent:
@@ -23,7 +23,7 @@ class ReceptionistAgent:
                 print("Out of Scope detected, ending workflow")
                 return {"output": response.content, "type_of_query": response.type_of_query}
             
-            return {"output": "", "should_end": False}
+            return {"output": "", "type_of_query": response.type_of_query}
         except Exception as e:
             print(e)
             return {"output": "Failed to process the query", "type_of_query": 2}

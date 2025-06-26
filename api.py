@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from src.workflow import Workflow
-from src.models import QuestionAnalysis
+from src.models.analyst_response import AnalystResponse
 import json
 import os
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Custom JSON encoder to handle QuestionAnalysis
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, QuestionAnalysis):
+        if isinstance(obj, AnalystResponse):
             # Convert QuestionAnalysis to dict
             return {
                 "clarified_query": getattr(obj, "clarified_query", ""),
@@ -57,6 +57,8 @@ def chat():
             "clarified_query": result.analysis.clarified_query,
             "customer_type": result.analysis.customer_type,
             "type_of_query": result.type_of_query,
+            "need_human": result.need_human,
+            "confidence_score": 1
         }
         
         return jsonify(response) 

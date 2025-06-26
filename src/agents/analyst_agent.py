@@ -1,6 +1,6 @@
 from src.prompts.analyst_prompt import ANALYST_SYSTEM_PROMPT, analyst_user_prompt
 from src.models.workflow_state import WorkflowState
-from src.models.question_analysis import QuestionAnalysis
+from src.models.analyst_response import AnalystResponse
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 class AnalystAgent:
@@ -12,7 +12,7 @@ class AnalystAgent:
         ]
 
         try:
-            structured_llm = llm.with_structured_output(QuestionAnalysis)
+            structured_llm = llm.with_structured_output(AnalystResponse)
             analysis = structured_llm.invoke(messages)
 
             return {"analysis": analysis}

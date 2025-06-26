@@ -1,6 +1,6 @@
 from src.prompts.summarizer_prompt import SUMMARIZER_SYSTEM_PROMPT, summarizer_user_prompt
 from src.models.workflow_state import WorkflowState
-from src.models.receptionist import ReceptionistResponse
+from src.models.receptionist_response import ReceptionistResponse
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 class SummarizerAgent:
