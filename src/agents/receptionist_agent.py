@@ -14,7 +14,8 @@ class ReceptionistAgent:
         try:
             structured_llm = llm.with_structured_output(ReceptionistResponse)
             response = structured_llm.invoke(messages)
-
+            print("Receptionist response received:")
+            print(f"Content: {response}")
             if response.type_of_query == 0:  # Small Talk
                 print("Small Talk detected, ending workflow")
                 return {"output": response.content, "type_of_query": response.type_of_query}

@@ -10,11 +10,14 @@ class AnalystAgent:
             SystemMessage(content=ANALYST_SYSTEM_PROMPT),
             HumanMessage(content=analyst_user_prompt(history_summarization=summarized_history, user_question=state.query))
         ]
-
+        print("Starting analysis with messages:")
+        for msg in messages:
+            print(f"{msg.type}: {msg.content}")
         try:
             structured_llm = llm.with_structured_output(AnalystResponse)
             analysis = structured_llm.invoke(messages)
-
+            print("Analysis completed successfully.")   
+            print(f"Main Topic: {analysis.main_topic}")
             return {"analysis": analysis}
         except Exception as e:
             print(e)

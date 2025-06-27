@@ -1,0 +1,14 @@
+# cai nay chua dung dau
+llm:
+  provider: openai
+  model: gpt-4o-mini
+  api_key: ${OPENAI_API_KEY}
+
+embedder:
+  backend: local
+
+search:
+  backend: local
+
+data:
+  embeddings_path: /home/dangdaoxuantruc/FBA-Core-Agents/src/data/embeddings_data.json

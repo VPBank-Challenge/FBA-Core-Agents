@@ -8,3 +8,4 @@ tqdm>=4.67.1
 transformers>=4.52.4
 flask>=2.3.0
 werkzeug>=2.3.0
+flask_cors>=6.0.1

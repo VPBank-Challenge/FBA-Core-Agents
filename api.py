@@ -1,17 +1,22 @@
 from flask import Flask, request, jsonify
-from src.workflow import Workflow
+from src.workflow import Workflow 
 from src.models.analyst_response import AnalystResponse
+from src.core.llm import BaseLLM 
+from src.core.search_engine import BaseSearchEngine  
+from src.core.embedding import BaseEmbedder 
+from src.service.llm.factory import get_llm_from_request
+from src.service.embedding.local_embedder import LocalEmbedder
+from src.service.search.local_search import LocalSearchEngine
 import json
 import os
+from flask_cors import CORS
 
-# Initialize Flask app
-app = Flask(__name__)   
+app = Flask(__name__)
+CORS(app)
 
-# Custom JSON encoder to handle QuestionAnalysis
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, AnalystResponse):
-            # Convert QuestionAnalysis to dict
             return {
                 "clarified_query": getattr(obj, "clarified_query", ""),
                 "information_need": getattr(obj, "information_need", ""),
@@ -19,36 +24,30 @@ class CustomJSONEncoder(json.JSONEncoder):
             }
         return super().default(obj)
 
-# Set the custom encoder
 app.json_encoder = CustomJSONEncoder
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
-        # Get the JSON data from the request
         data = request.get_json() or {}
-        
-        # Get API key from request body - required
+
         api_key = data.get('api_key')
-        if not api_key:
-            return jsonify({"error": "Missing required field 'api_key'"}), 400
-            
-        # Get model from request body with default
-        model = data.get('model', 'gpt-4o-mini')
-        
-        # Validate input
-        if 'question' not in data:
-            return jsonify({"error": "Missing required field 'question'"}), 400
-        
-        question = data['question']
-        
-        # Initialize workflow with API key and model
-        workflow = Workflow(api_key=api_key, model=model)
-        
-        # Process the question through workflow
+        provider = data.get('provider', 'openai')
+        model = data.get('model', 'gpt-4o')
+
+        question = data.get('question')
+        if not (api_key and question):
+            return jsonify({"error": "Missing required fields 'api_key' or 'question'"}), 400
+
+        llm = get_llm_from_request(provider=provider, model=model, api_key=api_key)
+
+        embedder = LocalEmbedder()
+        embedding_data = embedder.load_data()
+        search = LocalSearchEngine(embedder, embedding_data)
+
+        workflow = Workflow(llm=llm, embedder=embedder, search_engine=search, embedding_data=embedding_data)
         result = workflow.run(question)
-        
-        # Format the response similar to main.py
+
         response = {
             "question": result.query,
             "answer": result.output,
@@ -58,14 +57,13 @@ def chat():
             "customer_type": result.analysis.customer_type,
             "type_of_query": result.type_of_query,
             "need_human": result.need_human,
-            "confidence_score": 1
+            "confidence_score": 1 
         }
-        
-        return jsonify(response) 
-    
+        return jsonify(response)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 if __name__ == '__main__':
-    print("Starting VP Bank Assistant API")
     app.run(host='0.0.0.0', port=5000, debug=True)
