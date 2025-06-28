@@ -7,14 +7,13 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain_core.chat_history import InMemoryChatMessageHistory
 
-from .bert_embedding import Embedder
-from .agents.receptionist_agent import ReceptionistAgent
-from .agents.specialist_agent import SpecialistAgent
-from .agents.summarizer_agent import SummarizerAgent
-from .agents.analyst_agent import AnalystAgent
+from .agent.receptionist_agent import ReceptionistAgent
+from .agent.specialist_agent import SpecialistAgent
+from .agent.summarizer_agent import SummarizerAgent
+from .agent.analyst_agent import AnalystAgent
 
-from .models.workflow_state import WorkflowState
-
+from .model.workflow_state import WorkflowState
+from .tool.search_tool import HybirdSearch
 
 class Workflow:
     def __init__(self, api_key=None, model=None):
@@ -24,11 +23,8 @@ class Workflow:
         )
         self.workflow = self._build_workflow()
         self.memory = InMemoryChatMessageHistory()
-        self.embedder = Embedder()
+        self.hybrid_search_tool = HybirdSearch(collection_name="vpbank", path="/data/internal/langchain_qdrant")
 
-        embedding_data_path = os.path.join(os.path.dirname(__file__), "data", "embeddings_data.json")
-        with open(embedding_data_path, "r", encoding="utf-8") as f:
-            self.embedding_data = json.load(f)
 
     def _build_workflow(self):
         graph = StateGraph(WorkflowState)
@@ -57,34 +53,29 @@ class Workflow:
     def _analyst_step(self, state: WorkflowState) -> Dict[str, Any]:
         return AnalystAgent().run(state, self.llm, self.memory)
         
-    def search_knn(self, query, top_k=3):
-        query_emb = np.array(self.embedder.embed(query)).flatten()
-        all_embs = np.array([item["embedding"] for item in self.embedding_data])
-
-        sims = np.dot(all_embs, query_emb) / (np.linalg.norm(all_embs, axis=1) * np.linalg.norm(query_emb) + 1e-8)
-
-        top_idx = sims.argsort()[-top_k:][::-1]
-        return [int(i) for i in top_idx] 
-
     def _search_step(self, state: WorkflowState) -> Dict[str, Any]:
-        print("Searching for relevant information...")
+        print("Searching for relevant information (Qdrant Hybrid)...")
         query = getattr(state.analysis, "clarified_query", None) or state.query
-        top_items = self.search_knn(query, top_k=3)
-        top_items.extend(self.search_knn(state.query, top_k=3))
 
-        answers = []
-        for item in top_items:
-            try:
-                data = self.embedding_data[item]
-                question = data.get("question", "Unknown question")
-                answer = data.get("answer", "No answer available")
-                answers.append(f"Q: {question}\nA: {answer}")
-            except (IndexError, TypeError, KeyError) as e:
-                print(f"Error accessing embedding data at index {item}: {e}")
-                continue
+        try:
+            results = self.hybrid_search_tool.search_documents(query, limit=20)
+        except Exception as e:
+            print(f"Hybrid search error: {e}")
+            return {"search_results": "Error occur when retrieve data. Try later."}
 
-        search_results = "\n\n".join(answers) if answers else "Not found any relevant information."
-        return {"search_results": search_results}
+        if not results:
+            return {"search_results": "Not found relevant data."}
+
+        formatted = []
+        for doc in results:
+            meta = doc.get("metadata", {})
+            title = meta.get("title", "")
+            url = meta.get("url", "")
+            section = doc.get("text", "")
+            block = f"[{title}]({url})\n{section}" if url else f"{title}\n{section}"
+            formatted.append(block.strip())
+
+        return {"search_results": "\n\n".join(formatted)}
 
     def _specialist_step(self, state: WorkflowState) -> Dict[str, Any]:
         return SpecialistAgent().run(state, self.llm, self.memory)

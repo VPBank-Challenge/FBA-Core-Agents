@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from src.workflow import Workflow
-from src.models.analyst_response import AnalystResponse
+from src.model.analyst_response import AnalystResponse
 import json
 import os
 
