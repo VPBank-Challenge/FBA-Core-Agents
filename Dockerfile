@@ -1,23 +1,26 @@
-FROM python:3.13-slim
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Copy requirements first for better layer caching
 COPY requirements.txt .
-RUN pip install  -r requirements.txt
 
-# Copy the rest of your application
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+
+RUN pip install --no-cache-dir debugpy pytest ipython
+
 COPY . .
 
-# Create data directories if they don't exist
-RUN mkdir -p /app/src/data
+ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
-# Fix the InMemoryChatMessageHistory import issue
-# RUN sed -i 's/from langchain_core.chat_history import InMemoryChatMessageHistory/from langchain.memory import ChatMessageHistory as InMemoryChatMessageHistory/g' /app/src/workflow.py
+EXPOSE 8000
+EXPOSE 5678
 
-
-# Expose port 5000
-EXPOSE 5000
-
-# Run the Flask application
-CMD ["python", "-m", "src.api.endpoints"]
+CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "-m", "src.main"]

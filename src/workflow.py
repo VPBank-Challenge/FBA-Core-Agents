@@ -1,11 +1,14 @@
 import os
 import json
 import numpy as np
+import logging
 from typing import Dict, Any
 from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.chat_history import InMemoryChatMessageHistory
+from typing import Literal, List
+from pydantic import BaseModel
 
 from .agent.receptionist_agent import ReceptionistAgent
 from .agent.specialist_agent import SpecialistAgent
@@ -16,9 +19,12 @@ from .agent.validator_agent import ValidatorAgent
 from .agent.reflector_agent import ReflectorAgent
 
 from .model.workflow_state import WorkflowState
-from .utils.hybrid_search import HybirdSearch
 
+logger = logging.getLogger(__name__)
 
+class HistoryMessage(BaseModel):
+    role: str = Literal["bot", "user"]
+    message: str
 class Workflow:
     def __init__(self, api_key=None, model=None, 
                  opensearch_username=None, 
@@ -35,10 +41,6 @@ class Workflow:
         
         self.memory = InMemoryChatMessageHistory()
         self.search_count = None
-        self.hybrid_search_tool = HybirdSearch(
-            collection_name="vpbank",
-            path="/data/internal/langchain_qdrant"
-        )
 
         # Instantiate agents once
         self.summarizer_agent = SummarizerAgent()
@@ -96,7 +98,7 @@ class Workflow:
 
     def _search_step(self, state: WorkflowState) -> Dict[str, Any]:
         self.search_count += 1
-        return SearchAgent.run(state, self.hybrid_search_tool)
+        return SearchAgent.run(state, self.opensearch_endpoint, self.opensearch_username, self.opensearch_password)
 
     def _validator_step(self, state: WorkflowState) -> Dict[str, Any]:
         return self.validator_agent.run(state, self.llm)
@@ -107,14 +109,26 @@ class Workflow:
     def _specialist_step(self, state: WorkflowState) -> Dict[str, Any]:
         return self.specialist_agent.run(state, self.llm)
 
-    def run(self, query: str, previous_conversation: dict[str, str]) -> WorkflowState:
-        self.search_count = 0
-        self.memory.add_message(HumanMessage(content=query))
+    def run(self, query: str, previous_conversation: List[HistoryMessage]) -> WorkflowState:
+        try:
+            self.search_count = 0
+            
+            self.memory.clear()
 
-        initial_state = WorkflowState(query=query)
-        final_state = self.workflow.invoke(initial_state)
+            for msg in previous_conversation:
+                if msg.role == "user":
+                    self.memory.add_message(HumanMessage(content=msg.message))
+                elif msg.role == "bot":
+                    self.memory.add_message(AIMessage(content=msg.message))
 
-        output = final_state.get('output', '')
-        self.memory.add_message(AIMessage(content=output))
+            self.memory.add_message(HumanMessage(content=query))
+
+            initial_state = WorkflowState(query=query)
+            final_state = self.workflow.invoke(initial_state)
+
+            output = final_state.get('output', '')
+            self.memory.add_message(AIMessage(content=output))
+        except Exception as e:
+            logger.error(e)
 
         return WorkflowState(**final_state)
