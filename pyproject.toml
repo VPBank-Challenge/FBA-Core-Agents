@@ -15,6 +15,7 @@ dependencies = [
     "langchain-openai>=0.3.25",
     "langchain-qdrant>=0.2.0",
     "langgraph>=0.4.9",
+    "logging>=0.4.9.6",
     "nltk>=3.9.1",
     "numpy>=2.3.1",
     "python-dotenv>=1.1.1",

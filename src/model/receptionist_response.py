@@ -1,6 +1,6 @@
-from typing import List, Optional, Dict, Any
+from typing import Literal
 from pydantic import BaseModel
 
 class ReceptionistResponse(BaseModel):
-    type_of_query: int # 0: Small Talk, 2: Out of Scope, 1: Banking Query
+    type_of_query: Literal["small_talk", "out_of_scope", "banking"]
     content: str

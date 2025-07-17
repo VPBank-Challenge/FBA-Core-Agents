@@ -20,4 +20,4 @@ RUN mkdir -p /app/src/data
 EXPOSE 5000
 
 # Run the Flask application
-CMD ["python", "api.py"]
+CMD ["python", "-m", "src.api.endpoints"]
