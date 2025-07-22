@@ -1,0 +1,7 @@
+{
+    "question": "có thể vay được tối đa bao nhiêu",
+    "previous_conversation": [
+        {"role": "user", "message": "Xin chào"},
+        {"role": "bot", "message": "Xin chào! Em có thể giúp gì cho anh ạ"}
+    ]
+}

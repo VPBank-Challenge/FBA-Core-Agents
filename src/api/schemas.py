@@ -1,18 +1,15 @@
-from pydantic import BaseModel
-from typing import Optional, List, Literal
+# src/api/schemas.py
+from pydantic import BaseModel, Field
+from typing import List, Optional, Literal
+from datetime import datetime
 
 class HistoryMessage(BaseModel):
-    role: str = Literal["bot", "user"]
+    role: Literal["user", "bot"]
     message: str
 
 class ChatRequest(BaseModel):
-    api_key: str
-    model: Optional[str] = "gpt-4o-mini"
-    question: str
-    opensearch_username: str
-    opensearch_password: str
-    opensearch_endpoint: str
-    previous_conversation: Optional[List[HistoryMessage]] = None
+    question: str = Field(..., description="User's question")
+    previous_conversation: List[HistoryMessage] = Field(default=[], description="Conversation history")
 
 class ChatResponse(BaseModel):
     question: str
@@ -24,3 +21,11 @@ class ChatResponse(BaseModel):
     type_of_query: str
     need_human: bool
     confidence_score: float
+    timestamp: Optional[datetime] = Field(default_factory=datetime.now)
+
+class SetupRequest(BaseModel):
+    api_key: str
+    model: str
+    opensearch_endpoint: str
+    opensearch_username: str
+    opensearch_password: str

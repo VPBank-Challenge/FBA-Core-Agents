@@ -8,16 +8,14 @@ logger = logging.getLogger(__name__)
 
 class SearchAgent:
     @staticmethod
-    def run(state: WorkflowState, opensearch_endpoint: str, username: str, password: str):
+    async def run(state: WorkflowState, opensearch_endpoint: str, username: str, password: str):
         logger.info("Searching for relevant information (OpenSearch AWS)...")
         query = getattr(state.analysis, "clarified_query", None) or state.query
         search_results: list[SearchResult] = []
 
         try:
-            # ✅ Search main query
             results = SearchAgent._search_opensearch(opensearch_endpoint, username, password, query, 5)
 
-            # ✅ Search sub-queries (nếu có)
             for sub_query in getattr(state, "sub_queries", []):
                 sub_results = SearchAgent._search_opensearch(opensearch_endpoint, username, password, sub_query, 5)
                 results["hits"]["hits"].extend(sub_results.get("hits", {}).get("hits", []))

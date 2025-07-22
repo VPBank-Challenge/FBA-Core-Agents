@@ -1,7 +1,6 @@
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
 from .analyst_response import AnalystResponse
-from .validator_response import ValidatorResponse
 from .search_result import SearchResult
 
 class WorkflowState(BaseModel):
@@ -14,6 +13,6 @@ class WorkflowState(BaseModel):
     
     output: str = ""
     need_human: bool = False
+    is_final: bool = False
     
     analysis: Optional[AnalystResponse] = None
-    validation: Optional[ValidatorResponse] = None

@@ -11,7 +11,7 @@ class SpecialistAgent(BaseAgent):
     def __init__(self):
         super().__init__(SPECIALIST_SYSTEM_PROMPT)
 
-    def run(self, state: WorkflowState, llm):
+    async def run(self, state: WorkflowState, llm):
         try:
             search_results_combined = self.flatten_search_results(state.search_results)
 
@@ -22,7 +22,7 @@ class SpecialistAgent(BaseAgent):
             messages = self.create_message(user_prompt)
 
             structured_llm = llm.with_structured_output(SpecialistResponse)
-            response = structured_llm.invoke(messages)
+            response = await structured_llm.ainvoke(messages)
 
             return {
                 "output": response.output,

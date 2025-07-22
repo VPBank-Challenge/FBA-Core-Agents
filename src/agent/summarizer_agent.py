@@ -9,12 +9,12 @@ class SummarizerAgent(BaseAgent):
     def __init__(self):
         super().__init__(SUMMARIZER_SYSTEM_PROMPT)
     
-    def run(self, llm, memory):
+    async def run(self, llm, memory):
         user_prompt = summarizer_user_prompt(chat_history=memory.messages)
         messages = self.create_message(user_prompt)
 
         try:
-            summary = llm.invoke(messages)
+            summary = await llm.ainvoke(messages)
             return {"summerized_history": summary.content}
         except Exception:
             logger.exception("[{agent_name}]".format(self.__class__.__name__))
